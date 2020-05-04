@@ -1,0 +1,8 @@
+<form [formGroup]="form" (ngSubmit)="Onsubmit()">
+  <div class="form-group">
+    <input type="text" formControlName="name" class="form-control" />
+  </div>
+
+  <button type="submit">Save Changes</button>
+  <button type="button">Cancel</button>
+</form>

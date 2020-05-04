@@ -1,0 +1,5 @@
+<form [formGroup]="form" (ngSubmit)="movieCreate()">
+  <input type="text" formControlName="name" />
+  <button type="submit">Save</button>
+  <button type="button" routerLink="">Cancel</button>
+</form>
