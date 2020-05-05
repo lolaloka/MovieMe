@@ -1,5 +1,28 @@
 <form [formGroup]="form" (ngSubmit)="movieCreate()">
-  <input type="text" formControlName="name" />
-  <button type="submit">Save</button>
-  <button type="button" routerLink="">Cancel</button>
+
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <input type="text" class="form-control" formControlName="name" placeholder="Movie name" />
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <input type="text" class="form-control" formControlName="imgUrl" placeholder="Image link" />
+        <p class="alert alert-danger" *ngIf="form?.get('imgUrl').touched && form?.get('imgUrl')?.errors?.isNotLink">
+          رابط غير صحيح
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-success mx-1" type="submit">Save</button>
+      <button class="btn btn-info mx-1" type="button" routerLink="">Cancel</button>
+
+    </div>
+  </div>
 </form>
+<!--
+<app-create-or-update-movie-form (onSubmit)="movieCreate($event)"></app-create-or-update-movie-form> -->

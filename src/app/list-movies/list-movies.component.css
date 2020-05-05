@@ -1,0 +1,13 @@
+.delete-icon {
+  user-select: none;
+  background-color: #ff6363;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  flex-shrink: 0;
+}

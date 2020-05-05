@@ -1,5 +1,23 @@
-<ul>
-  <li *ngFor="let movie of movies">
-    <a routerLink=":id/update">{{ movie.name }}</a>
-  </li>
-</ul>
+<div class="row">
+  <ng-container *ngFor="let movie of movies">
+    <div class="col-3 my-1">
+      <div class="card rounded">
+        <div class="card-body">
+
+          <div class="img-container">
+            <img [src]="movie.imgUrl" class="w-100" *ngIf="movie.imgUrl" (error)="movie.imgUrl = defaultImgUrl">
+            <img [src]="defaultImgUrl" class="w-100" *ngIf="!movie.imgUrl">
+          </div>
+          <div class="d-flex justify-content-between align-item-center">
+            <a [routerLink]="[movie._id, 'update']">{{ movie.name }}</a>
+
+            <span class="delete-icon" title="حذف الفيلم" (click)="removeMovie(movie._id)">
+              X
+            </span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
