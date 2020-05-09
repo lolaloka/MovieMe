@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Movie } from '../@core/models';
 
 
@@ -7,10 +7,23 @@ import { Movie } from '../@core/models';
   providedIn: 'root',
 })
 export class MovieSService {
+
   url = 'http://localhost:3000/api/genres/';
+
   constructor(private _http: HttpClient) {}
-  ListMovies() {
-    return this._http.get<Movie[]>(this.url);
+
+  ListMovies(sortBy = 'name', searchTerm?: string) {
+    let httpParam = new HttpParams()
+    .append('sortBy', sortBy);
+
+    if (searchTerm) {
+      httpParam = httpParam.append('searchText', searchTerm);
+    }
+
+    // return this._http.get<Movie[]>(`${this.url}?sortBy=${sortBy}${ searchTerm ? `&searchTerm=${searchTerm}` : ''}`);
+    return this._http.get<Movie[]>(this.url, {
+      params: httpParam
+    });
   }
   createMovie(movieName: Movie) {
     return this._http.post<Movie>(this.url, movieName);
