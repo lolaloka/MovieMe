@@ -1,10 +1,22 @@
 <nav>
   <ul>
     <li>
-      <a routerLink=""> Movies </a>
+      <a routerLink=""> {{ 'MoviesTitle' | translate }} </a>
     </li>
     <li>
       <a routerLink="/create">Add New Movie</a>
+    </li>
+
+    <li>
+      <select (change)="changeLang($event.target.value)">
+
+        <option value="en">
+          EN
+        </option>
+        <option value="ar">
+          AR
+        </option>
+      </select>
     </li>
   </ul>
 </nav>

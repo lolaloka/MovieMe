@@ -1,24 +1,33 @@
 <form [formGroup]="form" (ngSubmit)="Onsubmit()">
-  <div class="form-group">
-    <input type="text" formControlName="name" class="form-control" />
-    <!-- const nameControlErrors = form.get('name').errors; -->
-  <ng-container *ngIf="form.get('name').touched && form.get('name').errors as nameControlErrors">
-    <p class="alert alert-danger" *ngIf="nameControlErrors.required">
-      عفوا هذا الحقل مطلوب
-    </p>
+  <div class="row">
+    <div class="col-4">
+      <div class="form-group">
+        <input type="text" formControlName="name" class="form-control" />
+        <!-- const nameControlErrors = form.get('name').errors; -->
+      <ng-container *ngIf="form.get('name').touched && form.get('name').errors as nameControlErrors">
+        <p class="alert alert-danger" *ngIf="nameControlErrors.required">
+          عفوا هذا الحقل مطلوب
+        </p>
 
-    <p class="alert alert-danger" *ngIf="nameControlErrors.minlength as minLength">
-      عدد الحروف المطلوب
-      {{ minLength.requiredLength }}
-      ، لقد ادخلت
-      {{ minLength.actualLength }}
-      حرف.
-    </p>
-  </ng-container>
+        <p class="alert alert-danger" *ngIf="nameControlErrors.minlength as minLength">
+          عدد الحروف المطلوب
+          {{ minLength.requiredLength }}
+          ، لقد ادخلت
+          {{ minLength.actualLength }}
+          حرف.
+        </p>
+      </ng-container>
+      </div>
+
+    </div>
+
+    <div class="col">
+      <img [src]="movie.imgUrl" style="width: 200px;" class="position-absolute" alt="">
+    </div>
   </div>
 
   <div class="row">
-    <div class="col-9">
+    <div class="col-4">
       <div class="form-group">
         <input type="text" class="form-control" formControlName="imgUrl">
 

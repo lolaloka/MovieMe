@@ -1,0 +1,11 @@
+<ul class="list-unstyled d-flex align-items-center m-0 p-0">
+  <ng-container *ngIf="pagesArray?.length">
+    <li *ngFor="let page of pagesArray;" class="p-1 m-1">
+      <button type="button" class="btn btn-primary"
+        [ngClass]=" { 'btn-primary': page === activePage }"
+        (click)="onPageChange.emit(page); activePage = page;">
+        {{ page }}
+      </button>
+    </li>
+  </ng-container>
+</ul>

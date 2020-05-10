@@ -15,9 +15,29 @@
       </select>
     </div>
   </div>
+  <div class="col-1">
+    <div class="form-group">
+      <select class="form-control" (change)="setPageSize($event.target.value)">
+        <option *ngFor="let pageSize of [8, 10, 20]" [value]="pageSize">
+          {{ pageSize }}
+        </option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-6">
+    <ng-container *ngIf="totalCount">
+      <app-pagination
+        [pages]="Math.ceil(totalCount / pageSize)"
+        (onPageChange)="setPageIndex($event)">
+      </app-pagination>
+    </ng-container>
+  </div>
 </div>
 <div class="row">
-  <ng-container *ngFor="let movie of movies">
+  <ng-container *ngFor="let movie of movies; trackBy: trackById">
     <div class="col-3 my-1">
       <div class="card rounded">
         <div class="card-body">
@@ -29,7 +49,7 @@
           <div class="d-flex justify-content-between align-item-center">
             <a [routerLink]="[movie._id, 'update']">{{ movie.name }}</a>
 
-            <span class="delete-icon" title="حذف الفيلم" (click)="removeMovie(movie._id)">
+            <span class="delete-icon" title="{{ 'removeMovie' | translate }}" (click)="removeMovie(movie._id)">
               X
             </span>
           </div>

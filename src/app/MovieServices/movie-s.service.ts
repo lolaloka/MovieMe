@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Movie } from '../@core/models';
 
+interface IRowsAndCount<T> {
+  rows: T[];
+  totalCount: number;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -12,16 +16,18 @@ export class MovieSService {
 
   constructor(private _http: HttpClient) {}
 
-  ListMovies(sortBy = 'name', searchTerm?: string) {
+  ListMovies(sortBy = 'name', searchTerm?: string, pageSize = 3, pageIndex = 1) {
     let httpParam = new HttpParams()
-    .append('sortBy', sortBy);
+    .append('sortBy', sortBy)
+    .append('limit', pageSize.toString())
+    .append('page', pageIndex.toString());
 
     if (searchTerm) {
-      httpParam = httpParam.append('searchText', searchTerm);
+      httpParam = httpParam.append('searchTerm', searchTerm);
     }
 
     // return this._http.get<Movie[]>(`${this.url}?sortBy=${sortBy}${ searchTerm ? `&searchTerm=${searchTerm}` : ''}`);
-    return this._http.get<Movie[]>(this.url, {
+    return this._http.get<IRowsAndCount<Movie>>(this.url, {
       params: httpParam
     });
   }
